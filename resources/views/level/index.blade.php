@@ -42,6 +42,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="panel-body text-center">
+                    {{ $levels->links() }}
+                </div>
             </div>
         </div>
     </div>

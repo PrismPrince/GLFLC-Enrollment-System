@@ -14,7 +14,7 @@ class SchoolyearController extends Controller
 
     public function index()
     {
-        $schoolyears = Schoolyear::orderBy('description')->get();
+        $schoolyears = Schoolyear::orderBy('description')->paginate(15);
 
         return view('schoolyear.index')->withSchoolyears($schoolyears);
     }

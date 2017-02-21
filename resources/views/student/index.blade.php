@@ -56,6 +56,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="panel-body text-center">
+                    {{ $students->links() }}
+                </div>
             </div>
         </div>
     </div>
