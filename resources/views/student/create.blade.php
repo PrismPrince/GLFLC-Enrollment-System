@@ -19,6 +19,7 @@
                                         @forelse ($levels as $level)
                                             <option value="{{ $level->id }}" {{ old('level_id') == $level->id ? 'selected' : '' }}>{{ $level->description }}</option>
                                         @empty
+                                            <option value="" disabled>--</option>
                                         @endforelse
                                     </select>
                                 </div>
@@ -32,6 +33,7 @@
                                         @forelse ($schoolyears as $schoolyear)
                                             <option value="{{ $schoolyear->id }}" {{ old('schoolyear_id') == $schoolyear->id ? 'selected' : '' }}>{{ $schoolyear->description }}</option>
                                         @empty
+                                            <option value="" disabled>--</option>
                                         @endforelse
                                     </select>
                                 </div>
