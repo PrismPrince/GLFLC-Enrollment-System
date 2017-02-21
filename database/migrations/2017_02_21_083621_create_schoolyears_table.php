@@ -17,6 +17,7 @@ class CreateSchoolyearsTable extends Migration
             $table->increments('id');
             $table->string('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
