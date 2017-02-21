@@ -7,79 +7,57 @@ use Illuminate\Http\Request;
 
 class LevelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $levels = Level::orderBy('description')->get();
+
+        return view('level.index')->withLevels($levels);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('level.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $level = new Level();
+
+        $level->description = $request->description;
+
+        $level->save();
+
+        return redirect()->route('level.show', [$level->id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Level  $level
-     * @return \Illuminate\Http\Response
-     */
     public function show(Level $level)
     {
-        //
+        return view('level.show')->withLevel($level);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Level  $level
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Level $level)
     {
-        //
+        return view('level.edit')->withLevel($level);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Level  $level
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Level $level)
     {
-        //
+        $level->description = $request->description;
+
+        $level->save();
+
+        return redirect()->route('level.show', [$level->id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Level  $level
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Level $level)
     {
-        //
+        $level->delete();
+
+        return redirect()->route('level.index');
     }
 }
