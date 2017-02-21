@@ -7,79 +7,57 @@ use Illuminate\Http\Request;
 
 class SchoolyearController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
+        $schoolyears = Schoolyear::orderBy('description')->get();
+
+        return view('schoolyear.index')->withSchoolyears($schoolyears);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('schoolyear.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $schoolyear = new Schoolyear();
+
+        $schoolyear->description = $request->description;
+
+        $schoolyear->save();
+
+        return redirect()->route('schoolyear.show', [$schoolyear->id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Schoolyear  $schoolyear
-     * @return \Illuminate\Http\Response
-     */
     public function show(Schoolyear $schoolyear)
     {
-        //
+        return view('schoolyear.show')->withSchoolyear($schoolyear);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Schoolyear  $schoolyear
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Schoolyear $schoolyear)
     {
-        //
+        return view('schoolyear.edit')->withSchoolyear($schoolyear);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Schoolyear  $schoolyear
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Schoolyear $schoolyear)
     {
-        //
+        $schoolyear->description = $request->description;
+
+        $schoolyear->save();
+
+        return redirect()->route('schoolyear.show', [$schoolyear->id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Schoolyear  $schoolyear
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Schoolyear $schoolyear)
     {
-        //
+        $schoolyear->delete();
+
+        return redirect()->route('schoolyear.index');
     }
 }
