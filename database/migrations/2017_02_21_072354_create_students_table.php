@@ -24,8 +24,8 @@ class CreateStudentsTable extends Migration
             $table->string('bdate');
             $table->string('bplace');
             $table->string('address');
-            $table->string('contactno');
-            $table->string('email');
+            $table->string('contactno')->nullable();
+            $table->string('email')->unique()->nullable();
             $table->string('citizenship');
             $table->string('civilstatus');
             $table->string('religion')->nullable();
