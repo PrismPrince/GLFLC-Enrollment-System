@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index');
 Route::resource('/student', 'StudentController');
 Route::resource('/level', 'LevelController');
 Route::resource('/schoolyear', 'SchoolyearController');
+
+Route::name('student.filter')->get('/filter/student', 'StudentController@filter');

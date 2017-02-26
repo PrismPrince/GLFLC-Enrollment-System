@@ -46,6 +46,7 @@
                         <li><a href="{{ route('student.index') }}">Students</a></li>
                         <li><a href="{{ route('level.index') }}">Grade Levels</a></li>
                         <li><a href="{{ route('schoolyear.index') }}">School Years</a></li>
+                        <li><a href="{{ route('student.filter') }}">Filter Students</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

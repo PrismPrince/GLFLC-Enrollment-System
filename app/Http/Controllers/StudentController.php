@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Student;
 use App\Level;
 use App\Schoolyear;
+use DB;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -113,5 +114,33 @@ class StudentController extends Controller
         $student->delete();
 
         return redirect()->route('student.index');
+    }
+
+    public function filter(Request $request)
+    {
+        $levels = Level::all();
+        $schoolyears = Schoolyear::all();
+
+        $students = Student::orderBy('lname')->orderBy('fname')->orderBy('mname');
+
+        if ($request->has('key'))
+            $students->searchName($request->key);
+        if ($request->has('sex'))
+            $students->where('sex', $request->sex);
+        if ($request->has('schoolyear'))
+            $students->where('schoolyear_id', $request->schoolyear);
+        if ($request->has('level'))
+            $students->where('level_id', $request->level);
+
+        return view('student.filter')
+            ->withStudents($students->paginate(15))
+            ->withLevels($levels)
+            ->withSchoolyears($schoolyears)
+            ->withInputs([
+                'key'        => $request->has('key') ? $request->key : '',
+                'sex'        => $request->has('sex') ? $request->sex : '',
+                'schoolyear' => $request->has('schoolyear') ? $request->schoolyear : '',
+                'level'      => $request->has('level') ? $request->level : '',
+            ]);
     }
 }
