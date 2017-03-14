@@ -36,25 +36,25 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        GLFLC Information System
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ route('student.index') }}">Students</a></li>
-                        <li><a href="{{ route('level.index') }}">Grade Levels</a></li>
-                        <li><a href="{{ route('schoolyear.index') }}">School Years</a></li>
-                        <li><a href="{{ route('student.filter') }}">Filter Students</a></li>
+                        <li class="{{ Request::is('student') ? "active" : "" }}"><a href="{{ route('student.index') }}">Students</a></li>
+                        <li class="{{ Request::is('level') ? "active" : "" }}"><a href="{{ route('level.index') }}">Grade Levels</a></li>
+                        <li class="{{ Request::is('schoolyear') ? "active" : "" }}"><a href="{{ route('schoolyear.index') }}">School Years</a></li>
+                        <li class="{{ Request::is('student.filter') ? "active" : "" }}"><a href="{{ route('student.filter') }}">Filter Students</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li class="{{ Request::is('login') ? "active" : "" }}"><a href="{{ route('login') }}">Login</a></li>
+                            <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
